@@ -8,6 +8,11 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
     <!-- JPA 하이버네이트 -->
     <dependency>
       <groupId>org.hibernate</groupId>
