@@ -16,6 +16,7 @@ public class JpaMain {
         try {
             Team team = new Team();
             team.setName("TeamA");
+            //team.getMembers().add(member);
             em.persist(team);
 
             Member member = new Member();
@@ -23,8 +24,7 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
-            Member findMember = em.find(Member.class, member.getId());
-            findMember.getTeam().getMembers();
+            team.getMembers().add(member);
 
             tx.commit();
         } catch (Exception e){
