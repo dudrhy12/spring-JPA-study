@@ -1,6 +1,9 @@
 package hellojpa;
 
+import jdk.vm.ci.meta.Local;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class MemberProduct {
@@ -11,4 +14,7 @@ public class MemberProduct {
     private Member member;
     @ManyToOne @JoinColumn(name="PRODUCT_ID")
     private Product product;
+    private int count;
+    private int price;
+    private LocalDateTime orderDateTime;
 }
