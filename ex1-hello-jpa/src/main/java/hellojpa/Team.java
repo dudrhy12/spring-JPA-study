@@ -9,8 +9,7 @@ public class Team {
     @Column(name="TEAM_ID")
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team") //Member의 team과 연결, Team의 반대편에 걸려 있는 것을 표기
-    private List<Member> members = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -27,16 +26,4 @@ public class Team {
         this.name = name;
     }
 
-    public List<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Member> members) {
-        this.members = members;
-    }
-
-    public void addMember(Member member) {
-        member.setTeam(this);
-        members.add(member);
-    }
 }
