@@ -12,6 +12,10 @@ public class Member {
     private Long id;
     @Column(name = "USERNAME")
     private String name;
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID",insertable=false,updatable=false)
+    private Team team;
+
     public Long getId() {
         return id;
     }
@@ -26,6 +30,10 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 
 }
