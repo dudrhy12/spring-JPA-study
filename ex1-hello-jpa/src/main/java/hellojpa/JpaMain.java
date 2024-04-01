@@ -44,7 +44,8 @@ public class JpaMain {
     }
 
     private static void logic(Member m1, Member m3) { //실제 비교되는 사례, 프록시로 넘어올지 엔티티로 넘어올지 모른다.
-        System.out.println("m1 == m3"+ (m1.getClass()==m3.getClass()));
+        System.out.println("m1 == m3"+ (m1 instanceof Member)); //true
+        System.out.println("m1 == m3"+ (m3 instanceof Member)); //true
     }
 
     private static void printMember(Member member) {
