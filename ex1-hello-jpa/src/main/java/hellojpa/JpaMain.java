@@ -25,25 +25,17 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m1 = em.find(Member.class, member1.getId());
-            System.out.println("m1="+m1.getClass()); //Member
-
             Member reference1 = em.getReference(Member.class, member1.getId());
-            System.out.println("reference1="+reference1.getClass()); //Member
+            System.out.println("reference1="+reference1.getClass()); //proxy
 
-            System.out.println("a==a"+(m1==reference1)); //True
+            em.detach(reference1);
 
-            Member reference2 = em.getReference(Member.class, member2.getId());
-            System.out.println("reference2="+reference2.getClass()); //Proxy
-
-            Member m2 = em.find(Member.class, member2.getId());
-            System.out.println("m2="+m2.getClass()); //Proxy
-
-            System.out.println("a==a"+(m2==reference2)); //Ture
+            System.out.println("reference1's name="+reference1.getName());
 
             tx.commit();
         } catch (Exception e){
             tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }
