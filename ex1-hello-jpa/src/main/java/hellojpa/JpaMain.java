@@ -26,13 +26,20 @@ public class JpaMain {
             em.clear();
 
             Member m1 = em.find(Member.class, member1.getId());
+            System.out.println("m1="+m1.getClass()); //Member
+
+            Member reference1 = em.getReference(Member.class, member1.getId());
+            System.out.println("reference1="+reference1.getClass()); //Member
+
+            System.out.println("a==a"+(m1==reference1)); //True
+
+            Member reference2 = em.getReference(Member.class, member2.getId());
+            System.out.println("reference2="+reference2.getClass()); //Proxy
+
             Member m2 = em.find(Member.class, member2.getId());
-            System.out.println("m1 == m2"+ (m1.getClass()==m2.getClass())); //true
+            System.out.println("m2="+m2.getClass()); //Proxy
 
-            Member m3 = em.getReference(Member.class, member2.getId());
-            System.out.println("m1 == m3"+ (m1.getClass()==m3.getClass())); //false
-
-            logic(m1, m3);
+            System.out.println("a==a"+(m2==reference2)); //Ture
 
             tx.commit();
         } catch (Exception e){
