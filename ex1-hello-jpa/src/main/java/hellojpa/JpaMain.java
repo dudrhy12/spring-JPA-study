@@ -14,17 +14,25 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("bella");
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setName("bella1");
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setName("bella2");
+            em.persist(member2);
 
             em.flush();
             em.clear();
-            //Member findMember = em.find(Member.class, member.getId());
-            Member findMember = em.getReference(Member.class, member.getId());
-            System.out.println("findMember="+findMember.getClass());
-            System.out.println("findMember.id="+findMember.getId());
-            System.out.println("findMember.username="+findMember.getName());
+
+            Member m1 = em.find(Member.class, member1.getId());
+            Member m2 = em.find(Member.class, member2.getId());
+            System.out.println("m1 == m2"+ (m1.getClass()==m2.getClass())); //true
+
+            Member m3 = em.getReference(Member.class, member2.getId());
+            System.out.println("m1 == m3"+ (m1.getClass()==m3.getClass())); //false
+
+            logic(m1, m3);
 
             tx.commit();
         } catch (Exception e){
@@ -33,6 +41,10 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void logic(Member m1, Member m3) { //실제 비교되는 사례, 프록시로 넘어올지 엔티티로 넘어올지 모른다.
+        System.out.println("m1 == m3"+ (m1.getClass()==m3.getClass()));
     }
 
     private static void printMember(Member member) {
