@@ -15,11 +15,11 @@ public class Member extends BaseEntity{
     private Long id;
     @Column(name = "USERNAME")
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
-    @OneToOne @JoinColumn(name="LOCKER_ID")
-    private Locker locker;
+/*    @OneToOne @JoinColumn(name="LOCKER_ID")
+    private Locker locker;*/
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
     public Long getId() {
