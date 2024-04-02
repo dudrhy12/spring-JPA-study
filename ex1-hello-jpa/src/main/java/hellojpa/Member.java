@@ -15,13 +15,20 @@ public class Member extends BaseEntity{
     private Long id;
     @Column(name = "USERNAME")
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
-    private Team team;
-/*    @OneToOne @JoinColumn(name="LOCKER_ID")
-    private Locker locker;*/
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+    @Embedded
+    private Period workPeriod;
+    @Embedded
+    private Address homeAddress;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column=@Column("WORK_CITY")),
+            @AttributeOverride(name="street",
+                    column=@Column("WORK_STREET")),
+            @AttributeOverride(name="zipcode",
+            column=@Column("WORK_ZIPCODE"))})
+    private Address workAddress;
+
     public Long getId() {
         return id;
     }
@@ -38,8 +45,19 @@ public class Member extends BaseEntity{
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getWorkPeriod() {
+        return workPeriod;
     }
 
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
