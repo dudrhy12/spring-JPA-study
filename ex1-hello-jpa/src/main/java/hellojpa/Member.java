@@ -22,12 +22,28 @@ public class Member extends BaseEntity{
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="city",
-                    column=@Column("WORK_CITY")),
+                    column=@Column(name = "WORK_CITY")),
             @AttributeOverride(name="street",
-                    column=@Column("WORK_STREET")),
+                    column=@Column(name = "WORK_STREET")),
             @AttributeOverride(name="zipcode",
-            column=@Column("WORK_ZIPCODE"))})
+            column=@Column(name = "WORK_ZIPCODE"))})
     private Address workAddress;
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Address getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(Address workAddress) {
+        this.workAddress = workAddress;
+    }
 
     public Long getId() {
         return id;
