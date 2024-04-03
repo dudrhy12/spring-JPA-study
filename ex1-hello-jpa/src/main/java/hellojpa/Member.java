@@ -3,9 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Member extends BaseEntity{
@@ -28,6 +26,15 @@ public class Member extends BaseEntity{
             @AttributeOverride(name="zipcode",
             column=@Column(name = "WORK_ZIPCODE"))})
     private Address workAddress;
+    @ElementCollection
+    @CollectionTable(name="FAVORITE_FOOD",
+            joinColumns = @JoinColumn(name="MEMBER_ID"))
+    @Column(name="FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name="ADDRESS",
+            joinColumns = @JoinColumn(name="MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList<>();
 
     public Address getHomeAddress() {
         return homeAddress;
@@ -69,11 +76,19 @@ public class Member extends BaseEntity{
         this.workPeriod = workPeriod;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public List<Address> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<Address> addressHistory) {
+        this.addressHistory = addressHistory;
     }
 }
