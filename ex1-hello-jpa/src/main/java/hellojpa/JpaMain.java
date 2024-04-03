@@ -23,15 +23,15 @@ public class JpaMain {
             member.getFavoriteFoods().add("치킨");
             member.getFavoriteFoods().add("족발");
             member.getFavoriteFoods().add("피자");
-            member.getAddressHistory().add(new Address("old1","street","1234"));
-            member.getAddressHistory().add(new Address("old2","street","1234"));
+            member.getAddressHistory().add(new AddressEntity("old1","street","1234"));
+            member.getAddressHistory().add(new AddressEntity("old2","street","1234"));
             em.persist(member);
 
             em.flush();
             em.clear();
 
             Member findMember = em.find(Member.class, member.getId());
-            List<Address> addressHistory = findMember.getAddressHistory();
+            List<AddressEntity> addressHistory = findMember.getAddressHistory();
 
             findMember.getHomeAddress().setCity("newCity"); //불가능
             Address a = findMember.getHomeAddress();
