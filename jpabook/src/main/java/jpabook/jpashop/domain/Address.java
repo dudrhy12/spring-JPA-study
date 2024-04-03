@@ -16,7 +16,7 @@ public class Address {
     public String fullAddress(){
         return getCity()+" "+getStreet()+" "+getZipcode();
     }
-    
+
     public String getCity() {
         return city;
     }
