@@ -26,11 +26,12 @@ public class JpaMain {
         em.flush();
         em.clear();
 
-        List<Object[]> resultList = em.createQuery("select m.username, m.age from Member m")
+        List<MemberDTO> resultList = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class)
                 .getResultList();
 
-        System.out.println("result"+resultList[0]);
-        System.out.println("result"+resultList[1]);
+        MemberDTO memberDto = resultList.get(0);
+        System.out.println("memberDto : "+ memberDto.getUsername());
+        System.out.println("memberDto : "+ memberDto.getAge());
 
             tx.commit();
         } catch (Exception e){
