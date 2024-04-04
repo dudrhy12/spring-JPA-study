@@ -23,6 +23,16 @@ public class JpaMain {
         Member member = new Member();
         member.setUsername("영서");
         em.persist(member);
+        em.flush();
+        em.clear();
+
+        List resultList = em.createQuery("select m.username, m.age from Member m")
+                .getResultList();
+
+        Object o = resultList.get(0);
+        Object[] result = (Object[]) 0;
+        System.out.println("result"+result[0]);
+        System.out.println("result"+result[1]);
 
             tx.commit();
         } catch (Exception e){
