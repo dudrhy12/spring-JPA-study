@@ -90,4 +90,5 @@ public class Member extends BaseEntity{
     public void setAddressHistory(List<AddressEntity> addressHistory) {
         this.addressHistory = addressHistory;
     }
+
 }
