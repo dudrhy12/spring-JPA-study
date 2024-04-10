@@ -17,6 +17,9 @@ public class Member extends BaseEntity{
     private Period workPeriod;
     @Embedded
     private Address homeAddress;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="city",
@@ -91,4 +94,10 @@ public class Member extends BaseEntity{
         this.addressHistory = addressHistory;
     }
 
+    public Team getTeam(){
+        return team;
+    }
+    public void setTeam(Team team){
+        this.team = team;
+    }
 }
