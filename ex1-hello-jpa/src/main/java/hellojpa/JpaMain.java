@@ -46,10 +46,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select distinct t From Team t join fetch t.members";
+            String query = "select m from Member m where m.id = :memberId";
 
-            List<Team> result = em.createQuery(query, Team.class)
-                            .getResultList();
+            Member result = em.createQuery(query, Member.class)
+                    .setParameter("memberId", member1.getId())
+                            .getSingleResult();
 
             tx.commit();
         } catch (Exception e){
@@ -64,5 +65,5 @@ public class JpaMain {
 
 
 
-    
+
 }
