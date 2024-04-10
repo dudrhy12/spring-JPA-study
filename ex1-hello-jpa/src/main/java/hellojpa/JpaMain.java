@@ -46,7 +46,7 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select t From Team t join fetch t.members";
+            String query = "select distinct t From Team t join fetch t.members";
 
             List<Team> result = em.createQuery(query, Team.class)
                             .getResultList();
@@ -61,4 +61,8 @@ public class JpaMain {
         emf.close();
     }
 
+
+
+
+    
 }
