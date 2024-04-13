@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop;
 
 import jakarta.persistence.EntityManager;
@@ -19,3 +20,4 @@ public class MemberRepository {
         return em.find(Member.class, id);
     }
 }
+*/
